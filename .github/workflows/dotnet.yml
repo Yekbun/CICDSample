@@ -24,4 +24,5 @@ jobs:
       working-directory: CICDSampleAPI/CICDSampleAPI
       run: dotnet build --no-restore
     - name: Test
+      working-directory: CICDSampleAPI/CICDSampleAPI
       run: dotnet test --no-build --verbosity normal
