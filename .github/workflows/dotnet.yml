@@ -28,6 +28,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Add remote origin
       run: |
+        heroku login
         git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_API_NAME }}.git
     - name: Deploy to Heroku
       run: |
