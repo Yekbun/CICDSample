@@ -33,4 +33,5 @@ jobs:
     - name: Deploy to Heroku
       run: |
         git fetch --unshallow
-        git push heroku HEAD:master -f
+        git pull
+        git push
