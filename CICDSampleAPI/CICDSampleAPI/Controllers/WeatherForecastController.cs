@@ -20,7 +20,7 @@ namespace CICDSampleAPI.Controllers
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            _logger = logger; 
         }
 
         [HttpGet]
@@ -34,6 +34,7 @@ namespace CICDSampleAPI.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+
         }
     }
 }
