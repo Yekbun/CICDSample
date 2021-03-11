@@ -13,7 +13,7 @@ namespace CICDSampleAPI.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Test",,"Feryat", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "Test","Feryat", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
@@ -27,6 +27,7 @@ namespace CICDSampleAPI.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
