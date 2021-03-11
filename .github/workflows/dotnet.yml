@@ -16,10 +16,21 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: CICDSampleAPI/CICDSampleAPI
     - name: Build
+      working-directory: CICDSampleAPI/CICDSampleAPI
       run: dotnet build --no-restore
     - name: Test
+      working-directory: CICDSampleAPI/CICDSampleAPI
       run: dotnet test --no-build --verbosity normal
+    - name: Add remote origin
+      run: |
+        heroku login
+        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_API_NAME }}.git
+    - name: Deploy to Heroku
+      run: |
+        git fetch --unshallow
+        git push
