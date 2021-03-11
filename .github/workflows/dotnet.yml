@@ -1,3 +1,6 @@
+env:
+  NETCORE_VERSION: 5.0.X
+
 name: .NET
 
 on:
@@ -16,7 +19,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: ${{ env.NETCORE_VERSION }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
