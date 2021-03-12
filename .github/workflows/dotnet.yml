@@ -26,7 +26,7 @@ jobs:
     - name: Test
       working-directory: CICDSampleAPI/CICDSampleAPI
       run: dotnet test --no-build --verbosity normal      
-   - name: Publish on Netlify
+    - name: Add remote origin
       uses: netlify/actions/cli@master #uses Netlify Cli actions
       env: # These are the environment variables added in GitHub Secrets for this repo
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
