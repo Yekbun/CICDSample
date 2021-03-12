@@ -25,13 +25,12 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       working-directory: CICDSampleAPI/CICDSampleAPI
-      run: dotnet test --no-build --verbosity normal
-    - name: Add remote origin
-      run: |
-        heroku login
-        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_API_NAME }}.git
-    - name: Deploy to Heroku
-      run: |
-        git fetch --unshallow
-        git pull
-        git push
+      run: dotnet test --no-build --verbosity normal      
+   - name: Publish on Netlify
+      uses: netlify/actions/cli@master #uses Netlify Cli actions
+      env: # These are the environment variables added in GitHub Secrets for this repo
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_APP_ID }}
+      with:
+          args: deploy --dir=publishoutput/wwwroot --prod #push this folder to Netlify
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_APP_ID"]' 
