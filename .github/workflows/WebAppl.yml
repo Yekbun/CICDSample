@@ -21,10 +21,14 @@ jobs:
       run: dotnet restore
       working-directory: CICDSampleAPI/CICDSampleWeb
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --configuration Release
       working-directory: CICDSampleAPI/CICDSampleWeb
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: CICDSampleAPI/CICDSampleWeb
+    -name: Publish
+     #create WebAssembly dist output folder in the project directory
+       run: dotnet publish -c Release --no-build -o publishoutput
       working-directory: CICDSampleAPI/CICDSampleWeb
     - name: Add remote origin
       uses: netlify/actions/cli@master #uses Netlify Cli actions
