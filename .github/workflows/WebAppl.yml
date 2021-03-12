@@ -16,10 +16,21 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+         dotnet-version: 3.1.x
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: CICDSampleAPI/CICDSampleWeb
     - name: Build
+      working-directory: CICDSampleAPI/CICDSampleWeb
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      working-directory: CICDSampleAPI/CICDSampleWeb
+      run: dotnet test --no-build --verbosity normal      
+    - name: Add remote origin
+      uses: netlify/actions/cli@master #uses Netlify Cli actions
+      env: # These are the environment variables added in GitHub Secrets for this repo
+          NETLIFY_AUTH_TOKEN: ${{ NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ NETLIFY_APP_ID }}
+      with:
+          args: deploy --dir=publishoutput/wwwroot --prod #push this folder to Netlify
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_APP_ID"]'
